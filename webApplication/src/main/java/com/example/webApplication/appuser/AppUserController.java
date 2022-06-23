@@ -1,5 +1,6 @@
 package com.example.webApplication.appuser;
 
+import org.apache.catalina.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +93,7 @@ public class AppUserController {
 //    }
 
     /*
-        register a user using DTO, this helps narrowing down the parameters required for the user to register(good for security)
+        register a user using DTOgit
      */
     @PostMapping("/user")
     public void registerAppUser(@RequestBody AppUserRegistrationDTO appUserRegistrationDTO) throws UserAlreadyExistsException {
@@ -101,13 +102,27 @@ public class AppUserController {
     }
 
 
-    //delete user
+
+    /*
+        delete user from database
+     */
+//    @DeleteMapping
+//    public void deleteAppUser(@RequestParam String email) throws UserNotFoundException {
+//        appUserService.deleteUser(email);
+//    }
+    /*
+
+     */
     @DeleteMapping
-    public void deleteAppUser(@RequestParam String email) throws UserNotFoundException {
-        appUserService.deleteUser(email);
+    public void deleteAppUserDTO(@RequestParam String email) throws UserNotFoundException {
+
     }
 
-    //update user data
+
+
+    /*
+        update user data
+     */
     @PutMapping
     public void updateUser(@RequestParam String lookupEmail,
                            @RequestParam(required = false) String firstName,
