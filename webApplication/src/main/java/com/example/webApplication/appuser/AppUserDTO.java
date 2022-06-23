@@ -7,6 +7,7 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 public class AppUserDTO {
+
     @NonNull
     private String firstName;
     @NonNull
