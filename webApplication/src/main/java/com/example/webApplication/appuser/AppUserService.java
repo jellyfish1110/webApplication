@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,9 +54,74 @@ public class AppUserService {
     public void deleteUser(String email) throws UserNotFoundException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(email);
         if(appUserOptional.isEmpty()) {
-            throw new UserNotFoundException("The user does not exist!");
+            throw new UserNotFoundException("This user does not exist1");
         }
         AppUser appUser = appUserOptional.get();
         appUserRepository.delete(appUser);
+    }
+
+    public void updateFirstName(String lookupEmail, String firstName) throws UserNotFoundException, InvalidArgumentsException {
+        Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
+        if(appUserOptional.isEmpty()) {
+            throw new UserNotFoundException("This user does not exist!");
+        }
+        AppUser appUserToUpdate = appUserOptional.get();
+        if(appUserToUpdate.getFirstName().equals(firstName)) {
+            throw new InvalidArgumentsException("New first name must not match your old name");
+        }
+        appUserToUpdate.setFirstName(firstName);
+        appUserRepository.save(appUserToUpdate);
+    }
+
+    public void updateLastName(String lookupEmail, String lastName) throws UserNotFoundException, InvalidArgumentsException {
+        Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
+        if(appUserOptional.isEmpty()) {
+            throw new UserNotFoundException("This user does not exist!");
+        }
+        AppUser appUserToUpdate = appUserOptional.get();
+        if(appUserToUpdate.getLastName().equals(lastName)) {
+            throw new InvalidArgumentsException("New last name must not match your old name!");
+        }
+        appUserToUpdate.setLastName(lastName);
+        appUserRepository.save(appUserToUpdate);
+    }
+
+    public void updateEmail(String lookupEmail, String email) throws UserNotFoundException, InvalidArgumentsException {
+        Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
+        if(appUserOptional.isEmpty()) {
+            throw new UserNotFoundException("This user does not exist!");
+        }
+        AppUser appUserToUpdate = appUserOptional.get();
+        if(lookupEmail.equals(email)) {
+            throw new InvalidArgumentsException("New email must not match your old email!");
+        }
+        appUserToUpdate.setEmail(email);
+        appUserRepository.save(appUserToUpdate);
+    }
+
+    public void updatePassword(String lookupEmail, String password) throws UserNotFoundException, InvalidArgumentsException {
+        Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
+        if(appUserOptional.isEmpty()) {
+            throw new UserNotFoundException("This user does not exist!");
+        }
+        AppUser appUserToUpdate = appUserOptional.get();
+        if(appUserToUpdate.getPassword().equals(password)) {
+            throw new InvalidArgumentsException("New password must not match your old one!");
+        }
+        appUserToUpdate.setPassword(password);
+        appUserRepository.save(appUserToUpdate);
+    }
+
+    public void updatePhoneNumber(String lookupEmail, String phoneNumber) throws UserNotFoundException, InvalidArgumentsException {
+        Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
+        if(appUserOptional.isEmpty()) {
+            throw new UserNotFoundException("This user does not exist!");
+        }
+        AppUser appUserToUpdate = appUserOptional.get();
+        if(appUserToUpdate.getPhoneNumber().equals(phoneNumber)) {
+            throw new InvalidArgumentsException("New phone number must not match your old one!");
+        }
+        appUserToUpdate.setPhoneNumber(phoneNumber);
+        appUserRepository.save(appUserToUpdate);
     }
 }

@@ -38,6 +38,9 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="2ba979af-2fb2-49cf-a218-fa3f65bbd87a" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="2ba979af-2fb2-49cf-a218-fa3f65bbd87a" dataset="public.app_user_user_posts" active-filter-id="" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>

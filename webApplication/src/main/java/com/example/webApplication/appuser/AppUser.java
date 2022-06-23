@@ -36,11 +36,11 @@ public class AppUser {
     @Column(unique = true)
     private String username;
     private String password;
-    private String phoneNumber;
+    private String phoneNumber = "";
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<UserPost> userPosts;
+    private List<UserPost> userPost;
 
     //Constructor for user without id as a parameter so the generation sequence can be used.
     public AppUser(String firstName, String lastName, String email, String username, String password) {
