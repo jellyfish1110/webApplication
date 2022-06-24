@@ -9,7 +9,6 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @Entity
-@Table(name = "user_post")
 @AllArgsConstructor
 @NoArgsConstructor
 /* Post class, with lombok annotation for the getters, setters and some of the constructors,
