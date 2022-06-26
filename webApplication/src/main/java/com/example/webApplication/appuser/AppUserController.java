@@ -96,8 +96,8 @@ public class AppUserController {
      */
     @PostMapping("/register")
     public void registerAppUser(@RequestBody AppUserRegistrationDTO appUserRegistrationDTO) throws UserAlreadyExistsException {
-        AppUser appUser = modelMapper.map(appUserRegistrationDTO, AppUser.class);
-        appUserService.addNewAppUser(appUser);
+
+        appUserService.addNewAppUser(appUserRegistrationDTO);
     }
 
     /*

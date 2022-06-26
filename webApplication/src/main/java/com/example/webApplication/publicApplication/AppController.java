@@ -1,12 +1,12 @@
 package com.example.webApplication.publicApplication;
 
-import com.example.webApplication.appuser.AppUserService;
+import com.example.webApplication.appuser.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.Thymeleaf;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AppController {
@@ -21,8 +21,27 @@ public class AppController {
 //        return "index";
 //    }
 
-    @GetMapping("")
+    @Autowired
+    private AppUserService appUserService;
+
+    private ModelMapper modelMapper;
+
+    @GetMapping
     public String viewHomePage() {
         return "index";
+    }
+
+    @GetMapping("/register")
+    public String viewRegisterPage(Model model) {
+        model.addAttribute("user", new AppUserRegistrationDTO());
+        return "register";
+    }
+
+    @PostMapping("/process_registration")
+    public String processRegistration(AppUserRegistrationDTO appUserDTO) throws UserAlreadyExistsException {
+        System.out.println(appUserDTO.toString());
+
+        appUserService.addNewAppUser(appUserDTO);
+        return "register_success";
     }
 }

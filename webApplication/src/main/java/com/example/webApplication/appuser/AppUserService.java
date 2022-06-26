@@ -1,21 +1,25 @@
 package com.example.webApplication.appuser;
 
-import org.apache.catalina.User;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AppUserService {
 
+    private final ModelMapper modelMapper;
     private final AppUserRepository appUserRepository;
 
     @Autowired
-    public AppUserService(AppUserRepository appUserRepository) {
+    public AppUserService(ModelMapper modelMapper, AppUserRepository appUserRepository) {
+        this.modelMapper = modelMapper;
         this.appUserRepository = appUserRepository;
     }
 
@@ -42,13 +46,19 @@ public class AppUserService {
         return appUserOptional;
     }
 
-    public void addNewAppUser(@RequestBody AppUser appUser) throws UserAlreadyExistsException {
-        Optional<AppUser> userOptional = appUserRepository.findByEmail(appUser.getEmail());
+    /*
+        Register user into the database.
+     */
+    public void addNewAppUser(AppUserRegistrationDTO appUserDTO) throws UserAlreadyExistsException {
+
+        Optional<AppUser> userOptional = appUserRepository.findByEmail(appUserDTO.getEmail());
         if(userOptional.isPresent()) {
             throw new UserAlreadyExistsException();
         }
-        appUser.setUserRole(UserRole.USER);
-        appUserRepository.save(appUser);
+        AppUser userToRegister = modelMapper.map(appUserDTO, AppUser.class);
+        userToRegister.setUserRole(UserRole.USER);
+
+        appUserRepository.save(userToRegister);
     }
 
     public void deleteUser(String email) throws UserNotFoundException {

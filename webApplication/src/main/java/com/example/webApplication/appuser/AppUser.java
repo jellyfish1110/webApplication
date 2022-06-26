@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "app_user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppUser {
