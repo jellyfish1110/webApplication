@@ -1,12 +1,9 @@
 package com.example.webApplication.appuser;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +13,13 @@ public class AppUserService {
 
     private final ModelMapper modelMapper;
     private final AppUserRepository appUserRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public AppUserService(ModelMapper modelMapper, AppUserRepository appUserRepository) {
+    public AppUserService(ModelMapper modelMapper, AppUserRepository appUserRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.modelMapper = modelMapper;
         this.appUserRepository = appUserRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     //Method that returns all users via the findAll() JpaRepository method.
@@ -52,20 +51,27 @@ public class AppUserService {
     public void addNewAppUser(AppUserRegistrationDTO appUserDTO) throws UserAlreadyExistsException {
 
         Optional<AppUser> userOptional = appUserRepository.findByEmail(appUserDTO.getEmail());
+
         if(userOptional.isPresent()) {
             throw new UserAlreadyExistsException();
         }
-        AppUser userToRegister = modelMapper.map(appUserDTO, AppUser.class);
-        userToRegister.setUserRole(UserRole.USER);
 
+        String passwordToUpdate = appUserDTO.getPassword();
+
+        AppUser userToRegister = modelMapper.map(appUserDTO, AppUser.class);
+
+        userToRegister.setUserRole(UserRole.USER);
+        userToRegister.setPassword(bCryptPasswordEncoder.encode(passwordToUpdate));
         appUserRepository.save(userToRegister);
     }
 
     public void deleteUser(String email) throws UserNotFoundException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(email);
+
         if(appUserOptional.isEmpty()) {
             throw new UserNotFoundException("This user does not exist1");
         }
+
         AppUser appUser = appUserOptional.get();
         appUserRepository.delete(appUser);
     }

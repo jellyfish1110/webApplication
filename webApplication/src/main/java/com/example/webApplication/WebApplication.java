@@ -9,11 +9,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude={SecurityAutoConfiguration.class})
 public class WebApplication {
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(WebApplication.class, args);
 	}
