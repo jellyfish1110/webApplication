@@ -6,15 +6,9 @@ import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
-public class AppUserRegistrationDTO {
-    @NonNull
-    private String firstName;
-    @NonNull
-    private String lastName;
+public class AppUserLoginDTO {
     @NonNull
     private String email;
-    @NonNull
-    private String username;
     @NonNull
     private String password;
 }

@@ -65,6 +65,9 @@ public class AppUserService {
         appUserRepository.save(userToRegister);
     }
 
+    /*
+        Delete user from the database
+     */
     public void deleteUser(String email) throws UserNotFoundException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(email);
 
