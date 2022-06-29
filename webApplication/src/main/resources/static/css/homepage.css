@@ -1,0 +1,16 @@
+.homepage-main {
+        row-gap: 2em;
+}
+
+.homepage-title {
+
+}
+
+.homepage-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1em;
+        column-gap: 1em;
+        row-gap: 1em;
+        background: #89cff0;
+}

@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <title>Welcome to CodeJava Home</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/homepage.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container text-center">
-    <h1>Welcome to CodeJava.net</h1>
-    <h3><a th:href="@{/users}">List of Users</a></h3>
-    <h3><a th:href="@{/register}">Register</a></h3>
-    <h3><a th:href="@{/login}">Login</a></h3>
-</div>
+    <div class="homepage-main">
+        <div class="homepage-title">
+            <h1>Welcome to ParcForumé, the official F1 forum.
+                In this forum you can stay up to date with the most
+                news in the racing world of Formula 1
+                feel free to enter and read other users' posts
+                as well as reacting to them or commenting underneath!</h1>
+        </div>
+
+        <div class="homepage-content text-center">
+            <div>
+                <h3><a th:href="@{/users}">List of Users</a></h3>
+            </div>
+            <div>
+                <h3><a th:href="@{/register}">Register</a></h3>
+            </div>
+            <div>
+                <h3><a th:href="@{/login}">Login</a></h3>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
