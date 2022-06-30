@@ -11,30 +11,31 @@
 <body>
     <div class="homepage_main">
         <div class="homepage_title">
-            <h1>Welcome to ParcForumé, the official F1 forum.
-                In this forum you can stay up to date with the most
-                news in the racing world of Formula 1
-                feel free to enter and read other users' posts
-                as well as reacting to them or commenting underneath!</h1>
+            <h1>Welcome to ParcForumé!</h1>
+        </div>
+        <div class="homepage_description">
+            <h2>If you are wondering what is going on in the F1 world, <br>
+                here is the place where you can stay updated.
+            </h2>
         </div>
 
         <div class="homepage_content text-center">
-            <form th:action="@{/users}" method="get">
-                <div class="item">
-                    <button type="submit" class="button">List of Users</button>
-                </div>
-            </form>
             <form th:action="@{/register}" method="get">
-                <div class="item">
+                <div class="register">
                     <button type="submit" class="button">Register</button>
                 </div>
             </form>
             <form th:action="@{/login}" method="get">
-                <div class="item">
+                <div class="login">
                     <button type="submit" class="button">Login</button>
                 </div>
             </form>
         </div>
+        <form th:action="@{/users}" method="get">
+            <div class="users">
+                <button type="submit" class="button">List of Users</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>
