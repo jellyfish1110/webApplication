@@ -1,16 +1,35 @@
-.homepage-main {
-        row-gap: 2em;
+.homepage_main {
+        display: grid;
+        gap: 2em;
 }
 
-.homepage-title {
-
+.homepage_title {
+        padding: 3em;
 }
 
-.homepage-content {
+.homepage_content {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        padding: 1em;
-        column-gap: 1em;
-        row-gap: 1em;
+        margin: 1em;
+        gap: 2em;
+}
+
+.item {
+        font-size: 20px;
+        grid-auto-rows: 100px;
+        grid-auto-columns: 150px;
         background: #89cff0;
+        border: black 2px solid;
+        striped: black 2px solid;
+}
+
+.button {
+        display: block;
+        width: 100%;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
 }

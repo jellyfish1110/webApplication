@@ -9,8 +9,8 @@
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="homepage-main">
-        <div class="homepage-title">
+    <div class="homepage_main">
+        <div class="homepage_title">
             <h1>Welcome to ParcForumé, the official F1 forum.
                 In this forum you can stay up to date with the most
                 news in the racing world of Formula 1
@@ -18,16 +18,22 @@
                 as well as reacting to them or commenting underneath!</h1>
         </div>
 
-        <div class="homepage-content text-center">
-            <div>
-                <h3><a th:href="@{/users}">List of Users</a></h3>
-            </div>
-            <div>
-                <h3><a th:href="@{/register}">Register</a></h3>
-            </div>
-            <div>
-                <h3><a th:href="@{/login}">Login</a></h3>
-            </div>
+        <div class="homepage_content text-center">
+            <form th:action="@{/users}" method="get">
+                <div class="item">
+                    <button type="submit" class="button">List of Users</button>
+                </div>
+            </form>
+            <form th:action="@{/register}" method="get">
+                <div class="item">
+                    <button type="submit" class="button">Register</button>
+                </div>
+            </form>
+            <form th:action="@{/login}" method="get">
+                <div class="item">
+                    <button type="submit" class="button">Login</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
