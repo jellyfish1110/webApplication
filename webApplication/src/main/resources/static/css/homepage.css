@@ -74,6 +74,10 @@
         margin-left: 33px;
 }
 
+.table_header {
+        gap: 1em;
+}
+
 .button {
         display: block;
         width: 100%;

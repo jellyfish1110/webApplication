@@ -37,21 +37,15 @@
         <div class="users">
             <h3 class="text-center">List of Users</h3>
             <table>
-                <tr>
-                    <div class="user_attribute">
-                        <th>First Name</th>
-                    </div>
-                    <div class="user_attribute">
-                        <th>Last Name</th>
-                    </div>
-                    <div class="user_attribute">
-                        <th>Username</th>
-                    </div>
+                <tr class="table_header">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
                 </tr>
                 <tr th:each="user: ${userList}">
-                    <td th:text="${user.firstName}"></td>
-                    <td th:text="${user.lastName}"></td>
-                    <td th:text="${user.username}"></td>
+                    <td class="text-center" th:text="${user.firstName}"></td>
+                    <td class="text-center" th:text="${user.lastName}"></td>
+                    <td class="text-center" th:text="${user.username}"></td>
                 </tr>
             </table>
         </div>
