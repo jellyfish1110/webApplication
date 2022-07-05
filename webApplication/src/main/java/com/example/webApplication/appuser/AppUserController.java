@@ -56,7 +56,7 @@ public class AppUserController {
      */
     @GetMapping("/id{userId}")
     public AppUserDTO getAppUserDTOById(@RequestParam Long userId) throws UserNotFoundException {
-        AppUser appUser  = appUserService.getAppUserById(userId).get();
+        AppUser appUser = appUserService.getAppUserById(userId).get();
         return modelMapper.map(appUser, AppUserDTO.class);
     }
 

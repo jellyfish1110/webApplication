@@ -1,9 +1,16 @@
+.background {
+        background-color: #EAE7DC;
+}
+
 .homepage_main {
+        background-color: #EAE7DC;
+        font-family: 'Finlandica', sans-serif;
         position: absolute;
         width: 100%;
-        height: 100%;
-        padding-left: 160gpx;
+        height: 70%;
+        padding-left: 160px;
         padding-right: 160px;
+        margin-top: 120px;
         display: grid;
         gap: 2em;
 }
@@ -43,8 +50,7 @@
         font-size: 1em;
         height: 40px;
         width: 70px;
-        background-color: #89cff0;
-        border: black 2px solid;
+        background-color: #D8C3A5;
 }
 
 .login {
@@ -52,25 +58,26 @@
         font-size: 1em;
         height: 40px;
         width: 70px;
-        background-color: #89cff0;
-        border: black 2px solid;
+        background-color: #D8C3A5;
 }
 
 .users {
-        font-size: 20px;
-        height: 100px;
-        width: 150px;
-        background-color: #89cff0;
-        border: black 2px solid;
-        grid-column-start: 3;
-        grid-column-end: 4;
+        font-size: 15px;
+        height: 450px;
+        width: 275px;
+        background-color: #D8C3A5;
+        overflow: hidden;
+        grid-column-start: 2;
+        grid-column-end: 3;
         grid-row-start: 1;
         grid-row-end: 4;
+        margin-left: 33px;
 }
 
 .button {
         display: block;
         width: 100%;
+        height: 100%;
         background-color: transparent;
         background-repeat: no-repeat;
         border: none;

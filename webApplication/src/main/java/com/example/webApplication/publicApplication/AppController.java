@@ -11,20 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class AppController {
-
-//    @GetMapping
-//    public String getAppInfo(Model model) {
-//        model.addAttribute("/users", "Welcome to ParcForumé, the official F1 forum." +
-//                "\nIn this forum you can stay up to date with the most " +
-//                "\nnews in the racing world of Formula 1 " +
-//                "\n feel free to enter and read other users' posts " +
-//                "\nas well as reacting to them or commenting underneath!");
-//        return "index";
-//    }
 
     @Autowired
     private AppUserService appUserService;
@@ -34,7 +26,11 @@ public class AppController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping
-    public String viewHomePage() {
+    public String viewHomePage(Model model) throws UserNotFoundException {
+        List<AppUser> userList = appUserService.getAllAppUsers();
+        System.out.println(userList);
+        //TODO: mapping all of the users as userDTOs
+        model.addAttribute("userList", userList);
         return "homepage";
     }
 
@@ -46,7 +42,7 @@ public class AppController {
 
     @RequestMapping("/login")
     public String viewLoginPage(Model model) {
-        model.addAttribute("user", new AppUserLoginDTO());
+        model.addAttribute("user", new AppUserRegistrationDTO());
         return "login";
     }
 
