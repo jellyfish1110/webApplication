@@ -68,4 +68,9 @@ public class AppController {
 
         return "login_successful";
     }
+
+    @GetMapping("/forum")
+    public String viewForum() {
+        return "login_successful";
+    }
 }
