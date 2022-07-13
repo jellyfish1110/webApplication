@@ -1,12 +1,10 @@
 package com.example.webApplication.publicApplication;
 
+import com.example.webApplication.fetchloggedusers.ActiveUserStorage;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Configuration
 public class AppConfig {
@@ -19,6 +17,11 @@ public class AppConfig {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A);
+    }
+
+    @Bean
+    public ActiveUserStorage activeUserStorage() {
+        return new ActiveUserStorage();
     }
 
     /*

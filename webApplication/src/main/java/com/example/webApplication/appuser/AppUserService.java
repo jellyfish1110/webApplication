@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AppUserService {
+public class AppUserService implements AppUserServiceInterface{
 
     private final ModelMapper modelMapper;
     private final AppUserRepository appUserRepository;
@@ -23,10 +23,12 @@ public class AppUserService {
     }
 
     //Method that returns all users via the findAll() JpaRepository method.
+    @Override
     public List<AppUser> getAllAppUsers() {
         return appUserRepository.findAll();
     }
 
+    @Override
     public Optional<AppUser> getAppUserById(Long id) throws UserNotFoundException {
         Optional<AppUser> optionalAppUser = appUserRepository.findById(id);
         if(optionalAppUser.isEmpty()) {
@@ -36,6 +38,7 @@ public class AppUserService {
         return optionalAppUser;
     }
 
+    @Override
     public Optional<AppUser> getAppUserByEmail(String email) throws UserNotFoundException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(email);
         if(appUserOptional.isEmpty()) {
@@ -48,6 +51,7 @@ public class AppUserService {
     /*
         Register user into the database.
      */
+    @Override
     public void addNewAppUser(AppUserRegistrationDTO appUserDTO) throws UserAlreadyExistsException {
 
         Optional<AppUser> userOptional = appUserRepository.findByEmail(appUserDTO.getEmail());
@@ -68,6 +72,7 @@ public class AppUserService {
     /*
         Delete user from the database
      */
+    @Override
     public void deleteUser(String email) throws UserNotFoundException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(email);
 
@@ -79,6 +84,7 @@ public class AppUserService {
         appUserRepository.delete(appUser);
     }
 
+    @Override
     public void updateFirstName(String lookupEmail, String firstName) throws UserNotFoundException, InvalidArgumentsException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
         if(appUserOptional.isEmpty()) {
@@ -92,6 +98,7 @@ public class AppUserService {
         appUserRepository.save(appUserToUpdate);
     }
 
+    @Override
     public void updateLastName(String lookupEmail, String lastName) throws UserNotFoundException, InvalidArgumentsException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
         if(appUserOptional.isEmpty()) {
@@ -105,6 +112,7 @@ public class AppUserService {
         appUserRepository.save(appUserToUpdate);
     }
 
+    @Override
     public void updateEmail(String lookupEmail, String email) throws UserNotFoundException, InvalidArgumentsException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
         if(appUserOptional.isEmpty()) {
@@ -118,6 +126,7 @@ public class AppUserService {
         appUserRepository.save(appUserToUpdate);
     }
 
+    @Override
     public void updatePassword(String lookupEmail, String password) throws UserNotFoundException, InvalidArgumentsException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
         if(appUserOptional.isEmpty()) {
@@ -131,6 +140,7 @@ public class AppUserService {
         appUserRepository.save(appUserToUpdate);
     }
 
+    @Override
     public void updatePhoneNumber(String lookupEmail, String phoneNumber) throws UserNotFoundException, InvalidArgumentsException {
         Optional<AppUser> appUserOptional = appUserRepository.findByEmail(lookupEmail);
         if(appUserOptional.isEmpty()) {

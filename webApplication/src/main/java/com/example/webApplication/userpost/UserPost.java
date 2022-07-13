@@ -4,6 +4,7 @@ import com.example.webApplication.appuser.AppUser;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Getter
@@ -29,6 +30,7 @@ public class UserPost {
     private Long id;
     private String content;
     private String title;
+    private LocalDateTime localDateTime;
     private ArrayList<String> comments;
     private Long likes = 0L;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -42,5 +44,6 @@ public class UserPost {
     public UserPost(String title, String content) {
         this.title = title;
         this.content = content;
+        this.localDateTime = LocalDateTime.now();
     }
 }

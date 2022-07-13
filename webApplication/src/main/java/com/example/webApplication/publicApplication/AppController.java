@@ -1,6 +1,7 @@
 package com.example.webApplication.publicApplication;
 
 import com.example.webApplication.appuser.*;
+import com.example.webApplication.userpost.UserPost;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -12,14 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 public class AppController {
 
     @Autowired
-    private AppUserService appUserService;
+    private AppUserServiceInterface appUserInterface;
 
     private ModelMapper modelMapper;
 
@@ -27,7 +26,7 @@ public class AppController {
 
     @GetMapping
     public String viewHomePage(Model model) throws UserNotFoundException {
-        List<AppUser> userList = appUserService.getAllAppUsers();
+        List<AppUser> userList = appUserInterface.getAllAppUsers();
         System.out.println(userList);
         //TODO: mapping all of the users as userDTOs
         model.addAttribute("userList", userList);
@@ -50,17 +49,16 @@ public class AppController {
     public String processRegistration(AppUserRegistrationDTO appUserDTO) throws UserAlreadyExistsException {
 //        System.out.println(appUserDTO.toString());
 
-        appUserService.addNewAppUser(appUserDTO);
+        appUserInterface.addNewAppUser(appUserDTO);
         return "register_success";
     }
 
     @GetMapping("/process_login")
     public String loginUser(AppUserLoginDTO appUserLoginDTO) throws UserNotFoundException, PasswordIncorrectException {
-        System.out.println("User details: \n" + appUserLoginDTO.getEmail() + "\n" + appUserLoginDTO.getPassword());
-        String email = new String(appUserLoginDTO.getEmail());
-        String password = new String(appUserLoginDTO.getPassword());
+        String username = appUserLoginDTO.getUsername();
+        String password = appUserLoginDTO.getPassword();
 
-        AppUser appUser = appUserService.getAppUserByEmail(email).get();
+        AppUser appUser = appUserInterface.getAppUserByEmail(username).get();
 
         if(!BCrypt.checkpw(password, appUser.getPassword())) {
             throw new PasswordIncorrectException("User with such email-password combination not found");
@@ -70,7 +68,9 @@ public class AppController {
     }
 
     @GetMapping("/forum")
-    public String viewForum() {
+    public String viewForum(Model model) {
+        model.addAttribute("post", new UserPost());
+
         return "login_successful";
     }
 }
