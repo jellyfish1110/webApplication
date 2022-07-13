@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserPostService {
+public class UserPostService implements UserPostServiceInterface {
 
     private final UserPostRepository userPostRepository;
 
@@ -15,10 +15,12 @@ public class UserPostService {
         this.userPostRepository = userPostRepository;
     }
 
+    @Override
     public List<UserPost> getAllPosts() {
         return userPostRepository.findAll();
     }
 
+    @Override
     public void postSomething(UserPost userPost) {
         String title = userPost.getTitle();
         String content = userPost.getContent();
