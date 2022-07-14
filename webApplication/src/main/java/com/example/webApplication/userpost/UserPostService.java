@@ -1,10 +1,8 @@
 package com.example.webApplication.userpost;
 
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserPostService implements UserPostServiceInterface {

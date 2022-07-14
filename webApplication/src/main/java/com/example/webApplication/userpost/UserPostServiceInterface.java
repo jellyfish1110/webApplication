@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface UserPostServiceInterface {
 
-    public List<UserPost> getAllPosts();
+    List<UserPost> getAllPosts();
 
-    public void postSomething(UserPost userPost);
+    void postSomething(UserPost userPost);
 }

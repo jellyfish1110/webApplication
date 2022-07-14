@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ParcForumé</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/forum.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Finlandica:ital@1&family=Splash&display=swap" rel="stylesheet"> </head>
+<body>
+    <div class="forum_grid">
+        <div class="home_button">
+            <form class="text-center" th:action="@{/forum}" method="get">
+                <button type="submit">ParcForumé</button>
+            </form>
+        </div>
+        <div class="forum_header">
+            <h1>Login successful, welcome to the forum!</h1>
+        </div>
+        <div class="profile_grid"  th:object="${user}">
+            <div class="grid-item text-center" id="profile_picture">
+                <img>
+                <h6>Profile Picture</h6>
+            </div>
+            <div class="grid_item text-center" id="username">
+                <h6>Username</h6>
+            </div>
+            <div class="grid_item text-center" id="user_info">
+                <h6>Names</h6>
+            </div>
+            <div class="grid_item text-center" id="edit">
+                <button id="edit_profile">Edit Profile</button>
+            </div>
+        </div>
+        <div class="find">
+            <form method="get">
+                <label for="search-box">Search</label>
+                    <input type="text" id="search-box">
+                <button type="submit"></button>
+            </form>
+        </div>
+
+
+        <!--
+            TODO:
+                -->
+        <div class="posts">
+            <table>
+                <!--TODO: make the table for the posts...-->
+            </table>
+        </div>
+        <div class="most_recent">
+            <!--TODO: make the table for the most recent searches...-->
+        </div>
+        <div class="topics">
+            <!--TODO: make the topics option menu...-->
+        </div>
+        <div class="settings">
+            <!--TODO: do the settings button and another page for it -->
+
+            <div id="log_out_button">
+                <form class="text-center" th:action="@{/}" method="get">
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

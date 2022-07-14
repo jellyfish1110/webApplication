@@ -54,7 +54,7 @@ public class AppController {
     }
 
     @GetMapping("/process_login")
-    public String loginUser(AppUserLoginDTO appUserLoginDTO) throws UserNotFoundException, PasswordIncorrectException {
+    public String processLogin(AppUserLoginDTO appUserLoginDTO) throws UserNotFoundException, PasswordIncorrectException {
         String username = appUserLoginDTO.getUsername();
         String password = appUserLoginDTO.getPassword();
 
@@ -71,6 +71,6 @@ public class AppController {
     public String viewForum(Model model) {
         model.addAttribute("post", new UserPost());
 
-        return "login_successful";
+        return "forum";
     }
 }
