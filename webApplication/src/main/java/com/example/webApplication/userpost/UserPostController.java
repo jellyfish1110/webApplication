@@ -1,5 +1,6 @@
 package com.example.webApplication.userpost;
 
+import com.example.webApplication.exceptions.UserNotLoggedInException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserPostController {
     }
 
     @PostMapping
-    public void postSomething(@RequestBody UserPost userPost) {
+    public void postSomething(@RequestBody UserPost userPost) throws UserNotLoggedInException {
         userPostService.postSomething(userPost);
     }
 }

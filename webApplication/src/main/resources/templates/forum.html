@@ -48,6 +48,16 @@
             TODO:
                 -->
         <div class="posts">
+            <form method="post" action="/postSomething  ">
+                <input type="hidden" name="html" value="&lt;p&gt;Your data has been deleted&lt/p&gt;" />
+                <input type="submit" value="Delete My Data" />
+            </form>
+            <div id="confirmBox">
+                <textarea> </textarea>
+                <div class="message"></div>
+                <span class="button yes">Proceed</span>
+                <span class="button no">Cancel</span>
+            </div>
             <table>
                 <!--TODO: make the table for the posts...-->
             </table>

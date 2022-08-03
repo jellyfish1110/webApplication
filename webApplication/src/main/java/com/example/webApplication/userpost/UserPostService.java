@@ -1,5 +1,6 @@
 package com.example.webApplication.userpost;
 
+import com.example.webApplication.exceptions.UserNotLoggedInException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserPostService implements UserPostServiceInterface {
     }
 
     @Override
-    public void postSomething(UserPost userPost) {
+    public void postSomething(UserPost userPost) throws UserNotLoggedInException {
         String title = userPost.getTitle();
         String content = userPost.getContent();
 
@@ -31,5 +32,9 @@ public class UserPostService implements UserPostServiceInterface {
             throw new IndexOutOfBoundsException("Content section should not exceed 8192 characters!");
         }
         userPostRepository.save(userPost);
+    }
+
+    @Override
+    public void updateOwnerId(Long id) {
     }
 }

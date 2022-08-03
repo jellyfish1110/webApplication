@@ -1,5 +1,9 @@
 package com.example.webApplication.appuser;
 
+import com.example.webApplication.exceptions.InvalidArgumentsException;
+import com.example.webApplication.exceptions.UserAlreadyExistsException;
+import com.example.webApplication.exceptions.UserNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 

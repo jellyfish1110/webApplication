@@ -1,7 +1,11 @@
 package com.example.webApplication.publicApplication;
 
 import com.example.webApplication.appuser.*;
+import com.example.webApplication.exceptions.PasswordIncorrectException;
+import com.example.webApplication.exceptions.UserAlreadyExistsException;
+import com.example.webApplication.exceptions.UserNotFoundException;
 import com.example.webApplication.userpost.UserPost;
+import com.example.webApplication.userpost.UserPostServiceInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,8 +27,8 @@ public class AppController {
     private AppUserServiceInterface appUserInterface;
 
     private ModelMapper modelMapper;
-
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserPostServiceInterface userPostServiceInterface;
 
     @GetMapping
     public String viewHomePage(Model model) throws UserNotFoundException {
@@ -54,7 +60,7 @@ public class AppController {
     }
 
     @GetMapping("/process_login")
-    public String processLogin(AppUserLoginDTO appUserLoginDTO) throws UserNotFoundException, PasswordIncorrectException {
+    public String processLogin(AppUserLoginDTO appUserLoginDTO, HttpServletRequest request) throws UserNotFoundException, PasswordIncorrectException {
         String username = appUserLoginDTO.getUsername();
         String password = appUserLoginDTO.getPassword();
 
@@ -64,13 +70,25 @@ public class AppController {
             throw new PasswordIncorrectException("User with such email-password combination not found");
         }
 
+        HttpSession session = request.getSession();
+        session.setAttribute("username", username);
+
         return "login_successful";
     }
 
     @GetMapping("/forum")
-    public String viewForum(Model model) {
-        model.addAttribute("post", new UserPost());
+    public String viewForum(Model model, HttpSession session) throws UserNotFoundException {
+        String username = (String) session.getAttribute("username");
+        Long id = appUserInterface.getAppUserByEmail(username).get().getId();
 
+        model.addAttribute("userId", id);
+        model.addAttribute("post", new UserPost());
         return "forum";
+    }
+
+    @PostMapping("/postSomething")
+    public String postSomething() {
+
+        return "login_successful";
     }
 }
